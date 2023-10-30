@@ -1,4 +1,4 @@
-export interface Card {
+export interface CardObj {
   name: string;
   height: string;
   mass: string;
@@ -21,5 +21,17 @@ export interface SearchResponse {
   count: string;
   next: string | null;
   previous: string | null;
-  results: Card[];
+  results: CardObj[];
+}
+
+export interface SearchProps {
+  setCards: (cards: CardObj[]) => void;
+}
+
+export interface ResultsProps {
+  cards: CardObj[];
+}
+
+export interface CardProps {
+  card: CardObj;
 }
