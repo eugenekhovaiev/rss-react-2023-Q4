@@ -2,6 +2,8 @@ import { Component } from 'react';
 import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
 import { CardObj } from '../../shared/types';
+import ErrorBoundary from '../../entities/errorBoundary/ErrorBoundary';
+import ErrorButton from '../../entities/errorButton/ErrorButton';
 
 class Main extends Component {
   constructor(props: object) {
@@ -28,6 +30,9 @@ class Main extends Component {
       <main>
         <SearchSection setCards={this.setCards} setLoaded={this.setLoaded} />
         <ResultsSection cards={this.state.cards} loaded={this.state.loaded} />
+        <ErrorBoundary>
+          <ErrorButton />
+        </ErrorBoundary>
       </main>
     );
   }

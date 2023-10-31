@@ -1,3 +1,7 @@
+export interface StandartProps {
+  children?: JSX.Element;
+}
+
 export interface CardObj {
   name: string;
   height: string;

@@ -17,6 +17,7 @@ class SearchForm extends Component<SearchProps> {
 
   public async componentDidMount(): Promise<void> {
     const result = await getCards(API_DATA.baseUrl, API_DATA.path, this.state.searchValue);
+
     this.props.setCards(result);
     this.props.setLoaded(true);
   }
@@ -31,10 +32,12 @@ class SearchForm extends Component<SearchProps> {
     this.props.setLoaded(false);
 
     localStorage.setItem('savedSearchValue', this.state.searchValue);
-    console.log(this.state.searchValue);
     const result = await getCards(API_DATA.baseUrl, API_DATA.path, this.state.searchValue);
+
     this.props.setCards(result);
     this.props.setLoaded(true);
+
+    console.log(this.state.searchValue);
     console.log(result);
   }
 
