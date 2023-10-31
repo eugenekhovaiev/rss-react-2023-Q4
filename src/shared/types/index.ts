@@ -26,10 +26,12 @@ export interface SearchResponse {
 
 export interface SearchProps {
   setCards: (cards: CardObj[]) => void;
+  setLoaded: (loaded: boolean) => void;
 }
 
 export interface ResultsProps {
   cards: CardObj[];
+  loaded: boolean;
 }
 
 export interface CardProps {

@@ -7,9 +7,13 @@ class ResultsSection extends Component<ResultsProps> {
     return (
       <section className="results">
         <div className="container">
-          <div className="results__cards">
-            {this.props.cards && this.props.cards.map((card: CardObj) => <Card key={card.name} card={card} />)}
-          </div>
+          {this.props.loaded ? (
+            <div className="results__cards">
+              {this.props.cards && this.props.cards.map((card: CardObj) => <Card key={card.name} card={card} />)}
+            </div>
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
       </section>
     );

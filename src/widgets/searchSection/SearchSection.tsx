@@ -7,7 +7,7 @@ class SearchSection extends Component<SearchProps> {
     return (
       <section className="search">
         <div className="container">
-          <SearchForm setCards={this.props.setCards} />
+          <SearchForm setCards={this.props.setCards} setLoaded={this.props.setLoaded} />
         </div>
       </section>
     );
