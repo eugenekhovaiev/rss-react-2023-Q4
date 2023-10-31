@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { ChangeEvent, Component, FormEvent } from 'react';
 import getCards from '../../shared/api/getCards';
 import { SearchProps } from '../../shared/types';
@@ -36,14 +35,11 @@ class SearchForm extends Component<SearchProps> {
 
     this.props.setCards(result);
     this.props.setLoaded(true);
-
-    console.log(this.state.searchValue);
-    console.log(result);
   }
 
   public render(): JSX.Element {
     return (
-      <form className="search__form search-form" onSubmit={this.handleSubmit}>
+      <form className="search-form search__form" onSubmit={this.handleSubmit}>
         <input
           type="text"
           className="search-form__input"
@@ -51,7 +47,7 @@ class SearchForm extends Component<SearchProps> {
           value={this.state.searchValue}
           placeholder="What Start Wars character are you looking for?"
         />
-        <button type="submit" className="search-form__submit">
+        <button type="submit" className="button search-form__submit">
           Search
         </button>
       </form>

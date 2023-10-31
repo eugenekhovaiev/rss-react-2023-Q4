@@ -12,7 +12,7 @@ class ResultsSection extends Component<ResultsProps> {
               {this.props.cards && this.props.cards.map((card: CardObj) => <Card key={card.name} card={card} />)}
             </div>
           ) : (
-            <div>Loading...</div>
+            <div className="loader results__loader">Loading...</div>
           )}
         </div>
       </section>

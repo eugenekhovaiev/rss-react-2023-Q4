@@ -21,7 +21,7 @@ class ErrorButton extends Component<StandartProps> {
     }
 
     return (
-      <button className="button" onClick={this.handleOnClick}>
+      <button className="button main__error-button" onClick={this.handleOnClick}>
         Throw Error
       </button>
     );

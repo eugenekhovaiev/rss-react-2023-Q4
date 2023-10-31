@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
-import { CardObj } from '../../shared/types';
+import { CardObj, StandartProps } from '../../shared/types';
 import ErrorBoundary from '../../entities/errorBoundary/ErrorBoundary';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
 
 class Main extends Component {
-  constructor(props: object) {
+  constructor(props: StandartProps) {
     super(props);
     this.setCards = this.setCards.bind(this);
     this.setLoaded = this.setLoaded.bind(this);
@@ -27,7 +27,7 @@ class Main extends Component {
 
   public render(): JSX.Element {
     return (
-      <main>
+      <main className="main">
         <SearchSection setCards={this.setCards} setLoaded={this.setLoaded} />
         <ResultsSection cards={this.state.cards} loaded={this.state.loaded} />
         <ErrorBoundary>
