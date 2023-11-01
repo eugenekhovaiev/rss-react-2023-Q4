@@ -1,0 +1,20 @@
+.search-form {
+  display: flex;
+  gap: 1rem;
+
+  &__input {
+    display: block;
+    padding: 0.7rem 1rem;
+    border-radius: 7px;
+    min-width: 40vw;
+
+    border: 1px solid yellow;
+    background-color: rgba(221, 221, 221, 0.068);
+    color: rgba(255, 255, 255, 0.637);
+  }
+
+  &__submit {
+    display: block;
+    border-radius: 7px;
+  }
+}

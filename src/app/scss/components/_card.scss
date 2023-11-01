@@ -1,0 +1,12 @@
+.card {
+  padding: 1rem;
+  border: 1px solid yellow;
+  border-radius: 5px;
+
+  background: #000 url('../../shared/assets/Star_Wars_Logo.svg.png') center right/50% no-repeat;
+  color: rgb(201, 201, 201);
+
+  &__line-title {
+    color: yellow;
+  }
+}

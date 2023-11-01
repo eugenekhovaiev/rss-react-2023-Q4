@@ -1,0 +1,21 @@
+.button {
+  padding: 0.7rem 1rem;
+
+  cursor: pointer;
+  display: block;
+  border-radius: 7px;
+
+  color: yellow;
+  border: 1px solid yellow;
+  background-color: rgba(0, 0, 0, 0);
+
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
