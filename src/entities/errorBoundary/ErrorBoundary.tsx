@@ -16,7 +16,11 @@ class ErrorBoundary extends Component<StandartProps> {
 
   public render(): JSX.Element {
     if (this.state.hasError) {
-      return <div className="main__error-message">Something went wrong :(</div>;
+      return (
+        <div className="error-message">
+          <div className="error-message__content">Something went wrong :(</div>
+        </div>
+      );
     }
 
     return this.props.children || <></>;
