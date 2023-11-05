@@ -1,31 +1,21 @@
-import { Component } from 'react';
-import { StandartProps } from '../../shared/types';
+import { useState } from 'react';
 
-class ErrorButton extends Component<StandartProps> {
-  constructor(props: StandartProps) {
-    super(props);
-    this.handleOnClick = this.handleOnClick.bind(this);
+function ErrorButton(): JSX.Element {
+  const [hasError, setHasError] = useState(false);
+
+  function handleOnClick(): void {
+    setHasError(true);
   }
 
-  public state = {
-    hasError: false,
-  };
-
-  private handleOnClick(): void {
-    this.setState({ hasError: true });
+  if (hasError) {
+    throw new Error('Test error');
   }
 
-  public render(): JSX.Element {
-    if (this.state.hasError) {
-      throw new Error('Test error');
-    }
-
-    return (
-      <button className="button main__error-button" onClick={this.handleOnClick}>
-        Throw Error
-      </button>
-    );
-  }
+  return (
+    <button className="button main__error-button" onClick={handleOnClick}>
+      Throw Error
+    </button>
+  );
 }
 
 export default ErrorButton;

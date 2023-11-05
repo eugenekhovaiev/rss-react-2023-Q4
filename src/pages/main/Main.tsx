@@ -1,41 +1,22 @@
-import { Component } from 'react';
+import { useState } from 'react';
+
 import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
-import { CardObj, StandartProps } from '../../shared/types';
-// import ErrorBoundary from '../../entities/errorBoundary/ErrorBoundary';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
 
-class Main extends Component {
-  constructor(props: StandartProps) {
-    super(props);
-    this.setCards = this.setCards.bind(this);
-    this.setLoaded = this.setLoaded.bind(this);
-  }
+import { CardObj } from '../../shared/types';
 
-  public state = {
-    cards: [],
-    loaded: false,
-  };
+function Main(): JSX.Element {
+  const [cards, setCards] = useState<CardObj[] | []>([]);
+  const [loaded, setLoaded] = useState(false);
 
-  public setCards(cards: CardObj[]): void {
-    this.setState({ cards });
-  }
-
-  public setLoaded(loaded: boolean): void {
-    this.setState({ loaded });
-  }
-
-  public render(): JSX.Element {
-    return (
-      <main className="main">
-        <SearchSection setCards={this.setCards} setLoaded={this.setLoaded} />
-        <ResultsSection cards={this.state.cards} loaded={this.state.loaded} />
-        {/* <ErrorBoundary> */}
-        <ErrorButton />
-        {/* </ErrorBoundary> */}
-      </main>
-    );
-  }
+  return (
+    <main className="main">
+      <SearchSection setCards={setCards} setLoaded={setLoaded} />
+      <ResultsSection cards={cards} loaded={loaded} />
+      <ErrorButton />
+    </main>
+  );
 }
 
 export default Main;
