@@ -24,13 +24,16 @@ export interface Response {
 }
 
 export interface SearchProps {
-  setCards: (cards: Product[]) => void;
-  setLoaded: (loaded: boolean) => void;
+  onSearchRequest: (searchTerm: string) => void;
 }
 
 export interface ResultsProps {
   cards: Product[];
   loaded: boolean;
+  currPage: number;
+  cardsPerPage: number;
+  totalItemsCount: number;
+  onPageChange: (newPageNumber: number) => void;
 }
 
 export interface CardProps {
@@ -38,6 +41,8 @@ export interface CardProps {
 }
 
 export interface PaginationProps {
-  onPageChange: (newPageNumber: number) => void;
   currPage: number;
+  cardsPerPage: number;
+  totalItemsCount: number;
+  onPageChange: (newPageNumber: number) => void;
 }

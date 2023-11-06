@@ -5,7 +5,7 @@ function SearchSection(props: SearchProps): JSX.Element {
   return (
     <section className="search">
       <div className="container">
-        <SearchForm setCards={props.setCards} setLoaded={props.setLoaded} />
+        <SearchForm onSearchRequest={props.onSearchRequest} />
       </div>
     </section>
   );

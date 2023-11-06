@@ -1,0 +1,3 @@
+const INITIAL_CARDS_PER_PAGE = 3;
+
+export default INITIAL_CARDS_PER_PAGE;
