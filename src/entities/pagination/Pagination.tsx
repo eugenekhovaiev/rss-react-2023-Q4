@@ -4,6 +4,7 @@ import arrowLeft from '../../shared/assets/arrow-left.svg';
 import { useEffect, useState } from 'react';
 
 import { PaginationProps } from '../../shared/types';
+// import CardsPerPageSelect from '../cardsPerPageSelect/CardsPerPageSelect';
 
 function Pagination(props: PaginationProps): JSX.Element {
   const [isFirstPage, setIsFirstPage] = useState(false);
@@ -25,31 +26,23 @@ function Pagination(props: PaginationProps): JSX.Element {
 
   function handleNextClick(): void {
     const newPageNumber = props.currPage + 1;
-
-    // setIsFirstPage(false);
-
     props.onPageChange(newPageNumber);
   }
 
   function handlePrevClick(): void {
     const newPageNumber = props.currPage - 1;
-
-    // setIsLastPage(false);
-
     props.onPageChange(newPageNumber);
   }
 
   return (
     <div className="pagination">
-      <div className="pagination__wrapper">
-        <button disabled={isFirstPage} className="button pagination__button" onClick={handlePrevClick}>
-          <img src={arrowLeft} alt="previous-page" />
-        </button>
-        <div className="pagination__number">{props.currPage}</div>
-        <button disabled={isLastPage} className="button pagination__button" onClick={handleNextClick}>
-          <img src={arrowRight} alt="next-page" />
-        </button>
-      </div>
+      <button disabled={isFirstPage} className="button pagination__button" onClick={handlePrevClick}>
+        <img src={arrowLeft} alt="previous-page" />
+      </button>
+      <div className="pagination__number">{props.currPage}</div>
+      <button disabled={isLastPage} className="button pagination__button" onClick={handleNextClick}>
+        <img src={arrowRight} alt="next-page" />
+      </button>
     </div>
   );
 }

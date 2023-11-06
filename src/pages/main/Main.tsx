@@ -13,7 +13,7 @@ function Main(): JSX.Element {
   const [cards, setCards] = useState<Product[] | []>([]);
 
   const [currPage, setCurrPage] = useState(1);
-  const [cardsPerPage] = useState(INITIAL_CARDS_PER_PAGE);
+  const [cardsPerPage, setCardsPerPage] = useState(INITIAL_CARDS_PER_PAGE);
   const [totalItemsCount, setTotalItemsCount] = useState(0);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,7 +38,7 @@ function Main(): JSX.Element {
 
     localStorage.setItem('savedSearchTerm', searchTerm);
     setSearchTerm(searchTerm);
-    const response = await getResponse({ searchTerm: searchTerm });
+    const response = await getResponse({ limit: cardsPerPage, searchTerm: searchTerm });
 
     setCards(response.products);
     setLoaded(true);
@@ -52,6 +52,18 @@ function Main(): JSX.Element {
     setCards(response.products);
   }
 
+  async function handleCardsAmountChange(newCardsAmount: number): Promise<void> {
+    setLoaded(false);
+    setCurrPage(1);
+    setCardsPerPage(newCardsAmount);
+
+    const response = await getResponse({ limit: newCardsAmount, searchTerm: searchTerm });
+
+    setCards(response.products);
+    setLoaded(true);
+    setTotalItemsCount(response.total);
+  }
+
   return (
     <main className="main">
       <SearchSection onSearchRequest={handleSearchRequest} />
@@ -62,6 +74,7 @@ function Main(): JSX.Element {
         cardsPerPage={cardsPerPage}
         totalItemsCount={totalItemsCount}
         onPageChange={handlePageChange}
+        onCardsAmountChange={handleCardsAmountChange}
       />
       <ErrorButton />
     </main>

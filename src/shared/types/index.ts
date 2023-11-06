@@ -34,6 +34,7 @@ export interface ResultsProps {
   cardsPerPage: number;
   totalItemsCount: number;
   onPageChange: (newPageNumber: number) => void;
+  onCardsAmountChange: (newCardsAmount: number) => void;
 }
 
 export interface CardProps {
@@ -45,4 +46,9 @@ export interface PaginationProps {
   cardsPerPage: number;
   totalItemsCount: number;
   onPageChange: (newPageNumber: number) => void;
+}
+
+export interface CardsAmountSelectProps {
+  cardsPerPage: number;
+  onCardsAmountChange: (newCardsAmount: number) => void;
 }

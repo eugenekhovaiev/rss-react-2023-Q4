@@ -1,6 +1,8 @@
 import { Product, ResultsProps } from '../../shared/types';
+
 import Card from '../../entities/card/Card';
 import Pagination from '../../entities/pagination/Pagination';
+import CardsAmountSelect from '../../entities/cardsAmountSelect/CardsAmountSelect';
 
 function ResultsSection(props: ResultsProps): JSX.Element {
   return (
@@ -12,12 +14,15 @@ function ResultsSection(props: ResultsProps): JSX.Element {
               <div className="results__cards">
                 {props.cards && props.cards.map((card: Product) => <Card key={card.id} card={card} />)}
               </div>
-              <Pagination
-                currPage={props.currPage}
-                cardsPerPage={props.cardsPerPage}
-                totalItemsCount={props.totalItemsCount}
-                onPageChange={props.onPageChange}
-              />
+              <div className="results__pagination">
+                <Pagination
+                  currPage={props.currPage}
+                  cardsPerPage={props.cardsPerPage}
+                  totalItemsCount={props.totalItemsCount}
+                  onPageChange={props.onPageChange}
+                />
+                <CardsAmountSelect cardsPerPage={props.cardsPerPage} onCardsAmountChange={props.onCardsAmountChange} />
+              </div>
             </div>
           ) : (
             <div className="loader results__loader">Nothing found for your request :(</div>

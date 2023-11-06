@@ -1,0 +1,16 @@
+.cards-amount-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__select {
+    padding: 0.3rem;
+
+    background-color: black;
+    color: inherit;
+    border: 1px solid yellow;
+    border-radius: 7px;
+
+    cursor: pointer;
+  }
+}
