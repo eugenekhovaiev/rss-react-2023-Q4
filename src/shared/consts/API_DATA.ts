@@ -1,6 +1,6 @@
 const API_DATA = {
-  baseUrl: 'https://swapi.dev/api/',
-  path: 'people/',
+  baseUrl: 'https://dummyjson.com/',
+  path: 'products/',
 };
 
 export default API_DATA;

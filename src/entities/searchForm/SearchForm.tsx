@@ -8,7 +8,7 @@ function SearchForm(props: SearchProps): JSX.Element {
 
   useEffect((): void => {
     (async (): Promise<void> => {
-      const result = await getCards(API_DATA.baseUrl, API_DATA.path, searchValue);
+      const result = await getCards({ baseUrl: API_DATA.baseUrl, path: API_DATA.path, searchTerm: searchValue });
 
       props.setCards(result);
       props.setLoaded(true);
@@ -26,7 +26,7 @@ function SearchForm(props: SearchProps): JSX.Element {
     props.setLoaded(false);
 
     localStorage.setItem('savedSearchValue', searchValue);
-    const result = await getCards(API_DATA.baseUrl, API_DATA.path, searchValue);
+    const result = await getCards({ baseUrl: API_DATA.baseUrl, path: API_DATA.path, searchTerm: searchValue });
 
     props.setCards(result);
     props.setLoaded(true);
@@ -39,7 +39,7 @@ function SearchForm(props: SearchProps): JSX.Element {
         className="search-form__input"
         onChange={handleInputChange}
         value={searchValue}
-        placeholder="What Start Wars character are you looking for?"
+        placeholder="What product are you looking for?"
       />
       <button type="submit" className="button search-form__submit">
         Search

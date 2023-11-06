@@ -4,10 +4,10 @@ import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
 
-import { CardObj } from '../../shared/types';
+import { Product } from '../../shared/types';
 
 function Main(): JSX.Element {
-  const [cards, setCards] = useState<CardObj[] | []>([]);
+  const [cards, setCards] = useState<Product[] | []>([]);
   const [loaded, setLoaded] = useState(false);
 
   // function pageChangeHandler(): void {

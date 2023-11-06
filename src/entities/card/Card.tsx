@@ -3,26 +3,22 @@ import { CardProps } from '../../shared/types';
 function Card(props: CardProps): JSX.Element {
   return (
     <div className="card">
-      <div className="card__line">
-        <span className="card__line-title">Name:</span> {props.card.name}
+      <div className="card__info">
+        <div className="card__line">
+          <span className="card__line-title">Title:</span> {props.card.title}
+        </div>
+        <div className="card__line">
+          <span className="card__line-title">Brand:</span> {props.card.brand}
+        </div>
+        <div className="card__line">
+          <span className="card__line-title">Price:</span> {props.card.price}
+        </div>
+        <div className="card__line">
+          <span className="card__line-title">Rating:</span> {props.card.rating}
+        </div>
       </div>
-      <div className="card__line">
-        <span className="card__line-title">Gender:</span> {props.card.gender}
-      </div>
-      <div className="card__line">
-        <span className="card__line-title">Birth year:</span> {props.card.birth_year}
-      </div>
-      <div className="card__line">
-        <span className="card__line-title">Height:</span> {props.card.height}
-      </div>
-      <div className="card__line">
-        <span className="card__line-title">Eye color:</span> {props.card.eye_color}
-      </div>
-      <div className="card__line">
-        <span className="card__line-title">Hair color:</span> {props.card.hair_color}
-      </div>
-      <div className="card__line">
-        <span className="card__line-title">Mass:</span> {props.card.mass}
+      <div className="card__thumbnail">
+        <img src={props.card.thumbnail} alt="thumbnail" />
       </div>
     </div>
   );

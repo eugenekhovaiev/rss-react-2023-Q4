@@ -2,42 +2,42 @@ export interface StandartProps {
   children?: JSX.Element;
 }
 
-export interface CardObj {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string[];
-  species: string[];
-  vehicles: string[];
-  starships: string[];
-  created: string;
-  edited: string;
-  url: string;
+export interface Product {
+  id: number;
+  title: string;
+  brand: string;
+  category: string;
+  description: string;
+  images: string[];
+  thumbnail: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
 }
 
-export interface SearchResponse {
-  count: string;
-  next: string | null;
-  previous: string | null;
-  results: CardObj[];
+export interface Response {
+  total: number;
+  limit: number;
+  skip: number;
+  products: Product[];
 }
 
 export interface SearchProps {
-  setCards: (cards: CardObj[]) => void;
+  setCards: (cards: Product[]) => void;
   setLoaded: (loaded: boolean) => void;
 }
 
 export interface ResultsProps {
-  cards: CardObj[];
+  cards: Product[];
   loaded: boolean;
 }
 
 export interface CardProps {
-  card: CardObj;
+  card: Product;
+}
+
+export interface PaginationProps {
+  onPageChange: (newPageNumber: number) => void;
+  currPage: number;
 }
