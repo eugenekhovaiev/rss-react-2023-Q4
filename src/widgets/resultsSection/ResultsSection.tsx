@@ -1,5 +1,6 @@
 import { CardObj, ResultsProps } from '../../shared/types';
 import Card from '../../entities/card/Card';
+import Pagination from '../../entities/pagination/Pagination';
 
 function ResultsSection(props: ResultsProps): JSX.Element {
   return (
@@ -12,6 +13,7 @@ function ResultsSection(props: ResultsProps): JSX.Element {
         ) : (
           <div className="loader results__loader">Loading...</div>
         )}
+        <Pagination />
       </div>
     </section>
   );

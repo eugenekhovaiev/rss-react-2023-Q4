@@ -10,6 +10,10 @@ function Main(): JSX.Element {
   const [cards, setCards] = useState<CardObj[] | []>([]);
   const [loaded, setLoaded] = useState(false);
 
+  // function pageChangeHandler(): void {
+
+  // }
+
   return (
     <main className="main">
       <SearchSection setCards={setCards} setLoaded={setLoaded} />
