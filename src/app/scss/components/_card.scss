@@ -5,6 +5,10 @@
 
   color: rgb(201, 201, 201);
 
+  text-decoration: none;
+
+  transition: all 0.3s;
+
   &__line-title {
     color: yellow;
   }
@@ -17,6 +21,15 @@
     img {
       display: block;
       border-radius: 7px;
+      width: 100%;
     }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(2px);
   }
 }

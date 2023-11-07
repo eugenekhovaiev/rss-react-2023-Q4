@@ -8,6 +8,7 @@ import ErrorButton from '../../entities/errorButton/ErrorButton';
 
 import getResponse from '../../shared/api/getCards';
 import INITIAL_CARDS_PER_PAGE from '../../shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
+import { Outlet } from 'react-router-dom';
 
 function Main(): JSX.Element {
   const [cards, setCards] = useState<Product[] | []>([]);
@@ -67,16 +68,19 @@ function Main(): JSX.Element {
   return (
     <main className="main">
       <SearchSection onSearchRequest={handleSearchRequest} />
-      <ResultsSection
-        cards={cards}
-        loaded={loaded}
-        currPage={currPage}
-        cardsPerPage={cardsPerPage}
-        totalItemsCount={totalItemsCount}
-        onPageChange={handlePageChange}
-        onCardsAmountChange={handleCardsAmountChange}
-      />
       <ErrorButton />
+      <div className="main__outlet">
+        <ResultsSection
+          cards={cards}
+          loaded={loaded}
+          currPage={currPage}
+          cardsPerPage={cardsPerPage}
+          totalItemsCount={totalItemsCount}
+          onPageChange={handlePageChange}
+          onCardsAmountChange={handleCardsAmountChange}
+        />
+        <Outlet />
+      </div>
     </main>
   );
 }

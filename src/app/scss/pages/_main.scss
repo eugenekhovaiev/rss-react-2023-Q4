@@ -3,6 +3,13 @@
   padding: 2rem;
   background-color: rgb(14, 14, 14);
 
+  &__outlet {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
   &__error-button {
     position: absolute;
     top: 2rem;

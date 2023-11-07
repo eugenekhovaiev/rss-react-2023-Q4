@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import { CardProps } from '../../shared/types';
 
 function Card(props: CardProps): JSX.Element {
   return (
-    <div className="card">
+    <Link to={`product/${props.card.id.toString()}`} className="card">
       <div className="card__info">
         <div className="card__line">
           <span className="card__line-title">Title:</span> {props.card.title}
@@ -20,7 +21,7 @@ function Card(props: CardProps): JSX.Element {
       <div className="card__thumbnail">
         <img src={props.card.thumbnail} alt="thumbnail" />
       </div>
-    </div>
+    </Link>
   );
 }
 
