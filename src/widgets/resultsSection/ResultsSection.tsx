@@ -3,6 +3,7 @@ import { Product, ResultsProps } from '../../shared/types';
 import Card from '../../entities/card/Card';
 import Pagination from '../../entities/pagination/Pagination';
 import CardsAmountSelect from '../../entities/cardsAmountSelect/CardsAmountSelect';
+import Loader from '../../shared/UI/Loader';
 
 function ResultsSection(props: ResultsProps): JSX.Element {
   return (
@@ -28,7 +29,7 @@ function ResultsSection(props: ResultsProps): JSX.Element {
             <div className="loader results__loader">Nothing found for your request :(</div>
           )
         ) : (
-          <div className="loader results__loader">Loading...</div>
+          <Loader />
         )}
       </div>
     </section>
