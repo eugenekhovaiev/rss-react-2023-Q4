@@ -1,8 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { SearchProps } from '../../shared/types';
+import { useSearchParams } from 'react-router-dom';
 
 function SearchForm(props: SearchProps): JSX.Element {
-  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('savedSearchTerm') || '');
+  const [searchParams] = useSearchParams();
+
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();

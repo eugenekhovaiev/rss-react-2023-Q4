@@ -4,7 +4,6 @@ import arrowLeft from '../../shared/assets/arrow-left.svg';
 import { useEffect, useState } from 'react';
 
 import { PaginationProps } from '../../shared/types';
-// import CardsPerPageSelect from '../cardsPerPageSelect/CardsPerPageSelect';
 
 function Pagination(props: PaginationProps): JSX.Element {
   const [isFirstPage, setIsFirstPage] = useState(false);

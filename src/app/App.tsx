@@ -1,7 +1,7 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Main from '../pages/main/Main';
 import DetailsSection from '../widgets/detailsSection/DetailsSection';
-import loadCardDetails from '../widgets/detailsSection/loader/loadCardDetails';
+import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,7 +1,9 @@
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 
 import { Product } from '../../shared/types';
 import Loader from '../../shared/UI/Loader';
+
+import CloseIcon from '../../shared/assets/close.svg';
 
 function DetailsSection(): JSX.Element {
   const product = useLoaderData() as Product;
@@ -37,6 +39,9 @@ function DetailsSection(): JSX.Element {
           <div className="card__thumbnail">
             <img src={product.thumbnail} alt="thumbnail" />
           </div>
+          <Link to={'/'} className="card__close">
+            <img src={CloseIcon} alt="thumbnail" />
+          </Link>
         </div>
       )}
     </section>
