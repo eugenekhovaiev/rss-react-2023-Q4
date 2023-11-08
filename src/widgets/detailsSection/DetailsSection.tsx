@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useNavigation } from 'react-router-dom';
+import { useLoaderData, useNavigate, useNavigation, useSearchParams } from 'react-router-dom';
 
 import { Product } from '../../shared/types';
 import Loader from '../../shared/UI/Loader';
@@ -9,6 +9,13 @@ function DetailsSection(): JSX.Element {
   const product = useLoaderData() as Product;
 
   const navigation = useNavigation();
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  function handleCloseClick(): void {
+    navigate(`/?${searchParams.toString()}`);
+  }
 
   return (
     <section className="details">
@@ -39,9 +46,9 @@ function DetailsSection(): JSX.Element {
           <div className="card__thumbnail">
             <img src={product.thumbnail} alt="thumbnail" />
           </div>
-          <Link to={'/'} className="card__close">
+          <div className="card__close" onClick={handleCloseClick}>
             <img src={CloseIcon} alt="thumbnail" />
-          </Link>
+          </div>
         </div>
       )}
     </section>
