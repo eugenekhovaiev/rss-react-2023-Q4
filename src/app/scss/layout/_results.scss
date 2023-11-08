@@ -1,0 +1,15 @@
+.results {
+  &__cards {
+    margin-bottom: 1.3rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

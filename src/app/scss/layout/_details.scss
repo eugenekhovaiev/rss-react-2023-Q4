@@ -1,0 +1,11 @@
+.details {
+  width: 50%;
+
+  &__card {
+    background-color: rgba(221, 221, 221, 0.068);
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
