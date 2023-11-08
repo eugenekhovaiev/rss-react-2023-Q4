@@ -5,7 +5,15 @@ import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Main />}>
+    <Route
+      path="/"
+      element={<Main />}
+      errorElement={
+        <div className="error-message">
+          <div className="error-message__content">Something went wrong :(</div>
+        </div>
+      }
+    >
       <Route path="product/:id" element={<DetailsSection />} loader={loadCardDetails} />
     </Route>,
   ),
