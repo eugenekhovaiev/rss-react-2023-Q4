@@ -28,7 +28,6 @@ export interface SearchProps {
 }
 
 export interface ResultsProps {
-  cards: Product[];
   loaded: boolean;
   currPage: number;
   cardsPerPage: number;
@@ -51,4 +50,11 @@ export interface PaginationProps {
 export interface CardsAmountSelectProps {
   cardsPerPage: number;
   onCardsAmountChange: (newCardsAmount: number) => void;
+}
+
+export interface AppContextType {
+  searchTerm: string;
+  setSearchTerm: (newSearchTerm: string) => void;
+  cards: Product[] | [];
+  setCards: (newProductsArray: Product[] | []) => void;
 }

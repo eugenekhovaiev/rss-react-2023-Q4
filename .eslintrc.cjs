@@ -30,7 +30,7 @@ module.exports = {
         html: true,
       },
     ],
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/array-type': [
       'error',

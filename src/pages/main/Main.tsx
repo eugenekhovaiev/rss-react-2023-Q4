@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Product } from '../../shared/types';
-
 import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
@@ -9,9 +7,11 @@ import ErrorButton from '../../entities/errorButton/ErrorButton';
 import getResponse from '../../shared/api/getCards';
 import INITIAL_CARDS_PER_PAGE from '../../shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
 import { Outlet, useSearchParams } from 'react-router-dom';
+import { useAppContext } from '../../shared/lib/AppContext';
 
 function Main(): JSX.Element {
-  const [cards, setCards] = useState<Product[] | []>([]);
+  const { setCards } = useAppContext();
+
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
@@ -96,7 +96,6 @@ function Main(): JSX.Element {
       <ErrorButton />
       <div className="main__outlet">
         <ResultsSection
-          cards={cards}
           loaded={loaded}
           currPage={+searchParams.get('page')!}
           cardsPerPage={+searchParams.get('limit')!}

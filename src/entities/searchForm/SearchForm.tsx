@@ -1,11 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { SearchProps } from '../../shared/types';
-import { useSearchParams } from 'react-router-dom';
+import { useAppContext } from '../../shared/lib/AppContext';
 
 function SearchForm(props: SearchProps): JSX.Element {
-  const [searchParams] = useSearchParams();
-
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const { searchTerm, setSearchTerm } = useAppContext();
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
