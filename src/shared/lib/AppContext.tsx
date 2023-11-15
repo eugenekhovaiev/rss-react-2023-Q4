@@ -3,12 +3,6 @@ import { AppContextType, Product, StandartProps } from '../types';
 import { useSearchParams } from 'react-router-dom';
 
 const AppContext = createContext<AppContextType | null>(null);
-// export const AppContext = createContext<AppContext | null>({
-//   searchTerm: '',
-//   setSearchTerm: () => null,
-//   cards: [],
-//   setCards: () => null,
-// });
 
 export const useAppContext = (): AppContextType => {
   const context = useContext(AppContext);
