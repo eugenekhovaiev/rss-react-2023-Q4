@@ -1,0 +1,16 @@
+.error-message {
+  background-color: rgb(14, 14, 14);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    padding: 0.7rem 1rem;
+    border: 1px solid red;
+    border-radius: 7px;
+
+    color: red;
+  }
+}
