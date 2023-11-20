@@ -2,7 +2,7 @@ import API_DATA from '../consts/API_DATA';
 import INITIAL_CARDS_PER_PAGE from '../consts/INITIAL_CARDS_ON_PAGE_COUNT';
 import { Response } from '../types';
 
-async function getResponse(options: {
+async function getProductsResp(options: {
   baseUrl?: string;
   path?: string;
   searchTerm?: string;
@@ -15,4 +15,4 @@ async function getResponse(options: {
   return await (await fetch(url)).json();
 }
 
-export default getResponse;
+export default getProductsResp;

@@ -10,8 +10,7 @@ function Card(props: CardProps): JSX.Element {
   }
 
   return (
-    // <Link to={`product/${props.card.id.toString()}`} className="card">
-    <div className="card" onClick={handleClick}>
+    <div className="card" data-testid="card" onClick={handleClick}>
       <div className="card__info">
         <div className="card__line">
           <span className="card__line-title">Title:</span> {props.card.title}

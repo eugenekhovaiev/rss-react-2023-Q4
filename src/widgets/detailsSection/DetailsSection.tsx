@@ -18,7 +18,7 @@ function DetailsSection(): JSX.Element {
   }
 
   return (
-    <section className="details">
+    <section className="details" data-testid="details">
       {navigation.state === 'loading' ? (
         <Loader />
       ) : (

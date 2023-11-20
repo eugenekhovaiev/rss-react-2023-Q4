@@ -4,7 +4,7 @@ import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
 
-import getResponse from '../../shared/api/getCards';
+import getProductsResp from '../../shared/api/getProductsResp';
 import INITIAL_CARDS_PER_PAGE from '../../shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../../shared/lib/AppContext';
@@ -26,7 +26,7 @@ function Main(): JSX.Element {
       ]);
 
       const offset = (+searchParams.get('page')! - 1) * +searchParams.get('limit')!;
-      const response = await getResponse({
+      const response = await getProductsResp({
         limit: +searchParams.get('limit')!,
         offset: offset,
         searchTerm: searchParams.get('search')!,
@@ -55,7 +55,7 @@ function Main(): JSX.Element {
       { param: 'search', value: searchTerm },
     ]);
 
-    const response = await getResponse({ limit: +searchParams.get('limit')!, searchTerm: searchTerm });
+    const response = await getProductsResp({ limit: +searchParams.get('limit')!, searchTerm: searchTerm });
 
     setCards(response.products);
     setLoaded(true);
@@ -66,7 +66,7 @@ function Main(): JSX.Element {
     editSearchParams([{ param: 'page', value: newPageNumber.toString() }]);
 
     const offset = (newPageNumber - 1) * +searchParams.get('limit')!;
-    const response = await getResponse({
+    const response = await getProductsResp({
       limit: +searchParams.get('limit')!,
       offset: offset,
       searchTerm: searchParams.get('search')!,
@@ -83,7 +83,7 @@ function Main(): JSX.Element {
       { param: 'page', value: '1' },
     ]);
 
-    const response = await getResponse({ limit: newCardsAmount, searchTerm: searchParams.get('search')! });
+    const response = await getProductsResp({ limit: newCardsAmount, searchTerm: searchParams.get('search')! });
 
     setCards(response.products);
     setLoaded(true);

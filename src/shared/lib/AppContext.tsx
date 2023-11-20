@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { AppContextType, Product, StandartProps } from '../types';
 import { useSearchParams } from 'react-router-dom';
 
-const AppContext = createContext<AppContextType | null>(null);
+export const AppContext = createContext<AppContextType | null>(null);
 
 export const useAppContext = (): AppContextType => {
   const context = useContext(AppContext);
