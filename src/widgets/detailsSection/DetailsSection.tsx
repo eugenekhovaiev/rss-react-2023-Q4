@@ -46,7 +46,7 @@ function DetailsSection(): JSX.Element {
           <div className="card__thumbnail">
             <img src={product.thumbnail} alt="thumbnail" />
           </div>
-          <div className="card__close" onClick={handleCloseClick}>
+          <div className="card__close" onClick={handleCloseClick} data-testid="details-close">
             <img src={CloseIcon} alt="thumbnail" />
           </div>
         </div>
