@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, RouterProvider, createMemoryRouter } from 'react-router-dom';
 
 import { AppContextProvider } from '../shared/lib/AppContext';
@@ -234,5 +234,42 @@ describe('Pagination component', () => {
     const nextPageIcon = await screen.findByAltText('next-page');
     await userEvent.click(nextPageIcon);
     expect(pageSearchParam).toHaveTextContent('Page: 2');
+  });
+});
+
+describe('Search component', () => {
+  test('Search button saves the entered value to the local storage after clicking on it', async () => {
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
+
+    localStorage.clear();
+
+    const searchForm = screen.getByTestId('search-form');
+    const searchInput = within(searchForm).getByRole('textbox');
+    const searchButton = within(searchForm).getByRole('button');
+
+    expect(localStorage.getItem('searchTerm')).toBeNull();
+    const searchTerm = 'phone';
+    await userEvent.type(searchInput, searchTerm);
+    await userEvent.click(searchButton);
+    expect(localStorage.getItem('searchTerm')).toBe(searchTerm);
+  });
+
+  test('retrieves the value from the local storage upon mounting', async () => {
+    localStorage.clear();
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
+
+    const searchForm = screen.getByTestId('search-form');
+    const searchInput = within(searchForm).getByRole('textbox');
+    const searchButton = within(searchForm).getByRole('button');
+
+    expect(localStorage.getItem('searchTerm')).toBeNull();
+    const searchTerm = 'phone';
+    await userEvent.type(searchInput, searchTerm);
+    await userEvent.click(searchButton);
+
+    cleanup();
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
+
+    expect(searchInput).toHaveValue('phone');
   });
 });

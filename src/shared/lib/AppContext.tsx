@@ -14,7 +14,8 @@ export const useAppContext = (): AppContextType => {
 
 export function AppContextProvider({ children }: StandartProps): JSX.Element {
   const [searchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || savedSearchTerm);
   const [cards, setCards] = useState<Product[] | []>([]);
 
   const value = {

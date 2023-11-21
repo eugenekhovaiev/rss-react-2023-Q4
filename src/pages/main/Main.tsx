@@ -19,10 +19,12 @@ function Main(): JSX.Element {
 
   useEffect((): void => {
     (async (): Promise<void> => {
+      const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+
       editSearchParams([
         { param: 'limit', value: searchParams.get('limit') || INITIAL_CARDS_PER_PAGE.toString() },
         { param: 'page', value: searchParams.get('page') || '1' },
-        { param: 'search', value: searchParams.get('search') || '' },
+        { param: 'search', value: searchParams.get('search') || savedSearchTerm },
       ]);
 
       const offset = (+searchParams.get('page')! - 1) * +searchParams.get('limit')!;
@@ -48,6 +50,7 @@ function Main(): JSX.Element {
   }
 
   async function handleSearchRequest(searchTerm: string): Promise<void> {
+    localStorage.setItem('searchTerm', searchTerm);
     setLoaded(false);
 
     editSearchParams([

@@ -16,7 +16,7 @@ function SearchForm(props: SearchProps): JSX.Element {
   }
 
   return (
-    <form className="search-form search__form" onSubmit={handleSubmit}>
+    <form className="search-form search__form" onSubmit={handleSubmit} data-testid="search-form">
       <input
         type="text"
         className="search-form__input"
