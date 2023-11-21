@@ -3,14 +3,18 @@ import Main from '../pages/main/Main';
 import DetailsSection from '../widgets/detailsSection/DetailsSection';
 import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 import { AppContextProvider } from '../shared/lib/AppContext';
+import SearchParamsDisplay from './SearchParamsDisplay';
 
-const getRoutes = (): RouteObject[] => {
+const getTestRoutes = (): RouteObject[] => {
   return createRoutesFromElements(
     <Route
       path="/"
       element={
         <AppContextProvider>
-          <Main />
+          <div>
+            <Main />
+            <SearchParamsDisplay />
+          </div>
         </AppContextProvider>
       }
       errorElement={
@@ -23,4 +27,4 @@ const getRoutes = (): RouteObject[] => {
     </Route>,
   );
 };
-export default getRoutes;
+export default getTestRoutes;

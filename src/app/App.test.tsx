@@ -8,7 +8,7 @@ import { MemoryRouter, RouterProvider, createMemoryRouter } from 'react-router-d
 
 import { AppContextProvider } from '../shared/lib/AppContext';
 import ResultsSection from '../widgets/resultsSection/ResultsSection';
-import getRoutes from './getRoutes';
+import getTestRoutes from './getTestRoutes';
 
 const { mockCards: mockCards } = vi.hoisted(() => {
   return {
@@ -117,7 +117,7 @@ vi.mock('../shared/api/getProductResp', () => {
 
 describe('Card list component', () => {
   test('renders the specified number of cards', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
     expect(cards.length).toBe(6);
@@ -148,7 +148,7 @@ describe('Card list component', () => {
 
 describe('Card component', () => {
   test('renders the relevant card data', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
 
@@ -169,7 +169,7 @@ describe('Card component', () => {
   });
 
   test('opens a detailed card component after clicking on it', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
     userEvent.click(cards[0]);
@@ -178,7 +178,7 @@ describe('Card component', () => {
   });
 
   test('triggers an additional API call to fetch detailed information after clicking on it', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
     userEvent.click(cards[0]);
@@ -187,25 +187,8 @@ describe('Card component', () => {
 });
 
 describe('Detailed card component', () => {
-  // test('displays loading indicator fetching data', async () => {
-  //   render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
-
-  //   // screen.debug();
-  //   const cards = await screen.findAllByTestId('card');
-  //   await userEvent.click(cards[0]);
-  //   const detailsSection = await screen.findByTestId('details');
-  //   screen.debug();
-  //   // console.log(detailsSection.innerHTML);
-  //   expect(detailsSection).toBeInTheDocument();
-  //   const loadingIndicator = await screen.findByText(/Loading/i);
-  //   // const loadingIndicator = within(detailsSection).findByText(/Loading/i);
-  //   console.log(loadingIndicator.outerHTML);
-  //   expect(loadingIndicator).toBeInTheDocument();
-  //   // screen.debug();
-  // });
-
   test('correctly displays the detailed card data', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
     await userEvent.click(cards[0]);
@@ -228,14 +211,28 @@ describe('Detailed card component', () => {
   });
 
   test('close button hides the component after clicking', async () => {
-    render(<RouterProvider router={createMemoryRouter(getRoutes(), { initialEntries: ['/'] })} />);
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
     const cards = await screen.findAllByTestId('card');
     userEvent.click(cards[0]);
     const detailsSection = await screen.findByTestId('details');
 
-    const closeButton = await screen.findByTestId('details-close');
-    await userEvent.click(closeButton);
+    const closeIcon = await screen.findByAltText('close-details');
+    await userEvent.click(closeIcon);
     expect(detailsSection).not.toBeInTheDocument();
+  });
+});
+
+describe('Pagination component', () => {
+  test('updates URL query parameter when page changes', async () => {
+    render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
+
+    const searchParamsDisplay = screen.getByTestId('search-params-display');
+    const pageSearchParam = within(searchParamsDisplay).getByText(/Page: /i);
+    expect(pageSearchParam).toHaveTextContent('Page: 1');
+
+    const nextPageIcon = await screen.findByAltText('next-page');
+    await userEvent.click(nextPageIcon);
+    expect(pageSearchParam).toHaveTextContent('Page: 2');
   });
 });
