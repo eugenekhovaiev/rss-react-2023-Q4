@@ -16,6 +16,16 @@
     "test:coverage": "vitest run --coverage",
     "test:coverage:ui": "vitest --ui --coverage"
   },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run format:fix",
+      "npm run lint",
+      "npm run test"
+    ],
+    "*.{scss,json}": [
+      "npm run format:fix"
+    ]
+  },
   "dependencies": {
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
@@ -41,6 +51,7 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "husky": "^8.0.0",
     "jsdom": "^22.1.0",
+    "lint-staged": "^15.1.0",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
     "typescript": "^5.0.2",
