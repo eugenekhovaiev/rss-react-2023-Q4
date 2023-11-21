@@ -4,6 +4,7 @@ import DetailsSection from '../widgets/detailsSection/DetailsSection';
 import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 import { AppContextProvider } from '../shared/lib/AppContext';
 import SearchParamsDisplay from './SearchParamsDisplay';
+import Page404 from '../pages/page404/Page404';
 
 const getTestRoutes = (): RouteObject[] => {
   return createRoutesFromElements(
@@ -24,6 +25,7 @@ const getTestRoutes = (): RouteObject[] => {
       }
     >
       <Route path="product/:id" element={<DetailsSection />} loader={loadCardDetails} />
+      <Route path="*" element={<Page404 />} />,
     </Route>,
   );
 };

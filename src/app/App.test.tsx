@@ -273,3 +273,15 @@ describe('Search component', () => {
     expect(searchInput).toHaveValue('phone');
   });
 });
+
+describe('404 Page component', () => {
+  test('is displayed when navigating to an invalid route', async () => {
+    const testRouter = createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] });
+
+    render(<RouterProvider router={testRouter} />);
+
+    await testRouter.navigate('/invalid');
+    const page404 = screen.getByTestId('page-404');
+    expect(page404).toBeInTheDocument();
+  });
+});

@@ -3,6 +3,7 @@ import Main from '../pages/main/Main';
 import DetailsSection from '../widgets/detailsSection/DetailsSection';
 import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 import { AppContextProvider } from '../shared/lib/AppContext';
+import Page404 from '../pages/page404/Page404';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       }
     >
       <Route path="product/:id" element={<DetailsSection />} loader={loadCardDetails} />
+      <Route path="*" element={<Page404 />} />,
     </Route>,
   ),
 );
