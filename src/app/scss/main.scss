@@ -1,0 +1,26 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  color: yellow;
+}
+
+@import 'normalize.css';
+@import './base/reset';
+
+@import './components/container';
+@import './components/button';
+@import './components/search-form';
+@import './components/card';
+@import './components/loader';
+@import './components/error-message';
+@import './components/pagination';
+@import './components/cards-amount-select';
+
+@import './layout/search';
+@import './layout/results';
+@import './layout/details';
+
+@import './pages/main';
+@import './pages/page404';

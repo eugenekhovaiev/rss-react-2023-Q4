@@ -1,0 +1,22 @@
+.pagination {
+  padding: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  border: 1px solid yellow;
+  border-radius: 7px;
+
+  &__button {
+    padding: 0.5rem 1rem;
+
+    img {
+      height: 1.3rem;
+    }
+  }
+
+  &__number {
+    font-weight: bold;
+  }
+}
