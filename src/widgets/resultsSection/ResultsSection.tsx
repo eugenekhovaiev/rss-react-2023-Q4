@@ -2,15 +2,16 @@ import { Product, ResultsProps } from '../../shared/types';
 
 import { MouseEvent } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { useAppContext } from '../../shared/lib/AppContext';
 import Card from '../../entities/card/Card';
 import Pagination from '../../entities/pagination/Pagination';
 import CardsAmountSelect from '../../entities/cardsAmountSelect/CardsAmountSelect';
 import Loader from '../../shared/UI/Loader';
+import { RootState } from '../../shared/lib/store/store';
 
 function ResultsSection(props: ResultsProps): JSX.Element {
-  const { cards } = useAppContext();
+  const cards = useSelector((state: RootState) => state.cards.cards);
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

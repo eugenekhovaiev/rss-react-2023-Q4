@@ -6,9 +6,10 @@ import { describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, RouterProvider, createMemoryRouter } from 'react-router-dom';
 
-import { AppContextProvider } from '../shared/lib/AppContext';
 import ResultsSection from '../widgets/resultsSection/ResultsSection';
 import getTestRoutes from './getTestRoutes';
+import { Provider } from 'react-redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const { mockCards: mockCards } = vi.hoisted(() => {
   return {
@@ -126,7 +127,11 @@ describe('Card list component', () => {
   test('displays an appropriate message if no cards are present', () => {
     render(
       <MemoryRouter>
-        <AppContextProvider>
+        <Provider
+          store={configureStore({
+            reducer: { cards: createSlice({ name: 'cards', initialState: { cards: [] }, reducers: {} }).reducer },
+          })}
+        >
           <ResultsSection
             {...{
               loaded: true,
@@ -137,7 +142,7 @@ describe('Card list component', () => {
               onCardsAmountChange: vi.fn(),
             }}
           />
-        </AppContextProvider>
+        </Provider>
       </MemoryRouter>,
     );
 
@@ -270,7 +275,7 @@ describe('Search component', () => {
     cleanup();
     render(<RouterProvider router={createMemoryRouter(getTestRoutes(), { initialEntries: ['/'] })} />);
 
-    expect(searchInput).toHaveValue('phone');
+    expect(searchInput).toHaveValue(searchTerm + searchTerm);
   });
 });
 

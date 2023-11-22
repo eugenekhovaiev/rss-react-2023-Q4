@@ -1,4 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Outlet, useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCards } from '../../shared/lib/store/slices/cardsSlice';
+
+import { Product } from '../../shared/types';
 
 import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
@@ -6,11 +11,12 @@ import ErrorButton from '../../entities/errorButton/ErrorButton';
 
 import getProductsResp from '../../shared/api/getProductsResp';
 import INITIAL_CARDS_PER_PAGE from '../../shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
-import { Outlet, useSearchParams } from 'react-router-dom';
-import { useAppContext } from '../../shared/lib/AppContext';
 
 function Main(): JSX.Element {
-  const { setCards } = useAppContext();
+  const dispatch = useDispatch();
+  const changeCards = (cards: Product[]): void => {
+    dispatch(setCards({ cards }));
+  };
 
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +40,7 @@ function Main(): JSX.Element {
         searchTerm: searchParams.get('search')!,
       });
 
-      setCards(response.products);
+      changeCards(response.products);
       setLoaded(true);
       setTotalItemsCount(response.total);
     })();
@@ -60,7 +66,7 @@ function Main(): JSX.Element {
 
     const response = await getProductsResp({ limit: +searchParams.get('limit')!, searchTerm: searchTerm });
 
-    setCards(response.products);
+    changeCards(response.products);
     setLoaded(true);
     setTotalItemsCount(response.total);
   }
@@ -75,7 +81,7 @@ function Main(): JSX.Element {
       searchTerm: searchParams.get('search')!,
     });
 
-    setCards(response.products);
+    changeCards(response.products);
   }
 
   async function handleCardsAmountChange(newCardsAmount: number): Promise<void> {
@@ -88,7 +94,7 @@ function Main(): JSX.Element {
 
     const response = await getProductsResp({ limit: newCardsAmount, searchTerm: searchParams.get('search')! });
 
-    setCards(response.products);
+    changeCards(response.products);
     setLoaded(true);
     setTotalItemsCount(response.total);
   }

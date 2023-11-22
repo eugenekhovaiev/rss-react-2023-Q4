@@ -1,13 +1,20 @@
 import { ChangeEvent, FormEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchProps } from '../../shared/types';
-import { useAppContext } from '../../shared/lib/AppContext';
+import { setSearchTerm } from '../../shared/lib/store/slices/searchSlice';
+import { RootState } from '../../shared/lib/store/store';
 
 function SearchForm(props: SearchProps): JSX.Element {
-  const { searchTerm, setSearchTerm } = useAppContext();
+  const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
+
+  const dispatch = useDispatch();
+  const changeSearchTerm = (searchTerm: string): void => {
+    dispatch(setSearchTerm({ searchTerm }));
+  };
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
-    setSearchTerm(event.target.value);
+    changeSearchTerm(event.target.value);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {

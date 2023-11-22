@@ -5,11 +5,15 @@ import App from './app/App.tsx';
 import ErrorBoundary from './entities/errorBoundary/ErrorBoundary.tsx';
 
 import './app/scss/main.scss';
+import { Provider } from 'react-redux';
+import store from './shared/lib/store/store.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
 );
