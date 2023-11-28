@@ -8,13 +8,13 @@ function SearchForm(props: SearchProps): JSX.Element {
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
 
   const dispatch = useDispatch();
-  const changeSearchTerm = (searchTerm: string): void => {
+  const updateSearchTerm = (searchTerm: string): void => {
     dispatch(setSearchTerm({ searchTerm }));
   };
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
-    changeSearchTerm(event.target.value);
+    updateSearchTerm(event.target.value);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {

@@ -9,14 +9,15 @@ import SearchSection from '../../widgets/searchSection/SearchSection';
 import ResultsSection from '../../widgets/resultsSection/ResultsSection';
 import ErrorButton from '../../entities/errorButton/ErrorButton';
 
-import getProductsResp from '../../shared/api/getProductsResp';
 import INITIAL_CARDS_PER_PAGE from '../../shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
+import { useLazyGetCardsQuery } from '../../shared/api/cardsApi';
 
 function Main(): JSX.Element {
   const dispatch = useDispatch();
-  const changeCards = (cards: Product[]): void => {
+  const updateCards = (cards: Product[]): void => {
     dispatch(setCards({ cards }));
   };
+  const [trigger] = useLazyGetCardsQuery();
 
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -26,23 +27,20 @@ function Main(): JSX.Element {
   useEffect((): void => {
     (async (): Promise<void> => {
       const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-
       editSearchParams([
         { param: 'limit', value: searchParams.get('limit') || INITIAL_CARDS_PER_PAGE.toString() },
         { param: 'page', value: searchParams.get('page') || '1' },
         { param: 'search', value: searchParams.get('search') || savedSearchTerm },
       ]);
-
       const offset = (+searchParams.get('page')! - 1) * +searchParams.get('limit')!;
-      const response = await getProductsResp({
+      const { data } = await trigger({
         limit: +searchParams.get('limit')!,
         offset: offset,
         searchTerm: searchParams.get('search')!,
       });
-
-      changeCards(response.products);
+      updateCards(data?.products || []);
       setLoaded(true);
-      setTotalItemsCount(response.total);
+      setTotalItemsCount(data?.total || 0);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -64,24 +62,26 @@ function Main(): JSX.Element {
       { param: 'search', value: searchTerm },
     ]);
 
-    const response = await getProductsResp({ limit: +searchParams.get('limit')!, searchTerm: searchTerm });
+    const { data } = await trigger({ limit: +searchParams.get('limit')!, searchTerm: searchTerm });
 
-    changeCards(response.products);
+    updateCards(data?.products || []);
     setLoaded(true);
-    setTotalItemsCount(response.total);
+    setTotalItemsCount(data?.total || 0);
   }
 
   async function handlePageChange(newPageNumber: number): Promise<void> {
     editSearchParams([{ param: 'page', value: newPageNumber.toString() }]);
+    setLoaded(false);
 
     const offset = (newPageNumber - 1) * +searchParams.get('limit')!;
-    const response = await getProductsResp({
+    const { data } = await trigger({
       limit: +searchParams.get('limit')!,
       offset: offset,
       searchTerm: searchParams.get('search')!,
     });
 
-    changeCards(response.products);
+    updateCards(data?.products || []);
+    setLoaded(true);
   }
 
   async function handleCardsAmountChange(newCardsAmount: number): Promise<void> {
@@ -92,11 +92,11 @@ function Main(): JSX.Element {
       { param: 'page', value: '1' },
     ]);
 
-    const response = await getProductsResp({ limit: newCardsAmount, searchTerm: searchParams.get('search')! });
+    const { data } = await trigger({ limit: newCardsAmount, searchTerm: searchParams.get('search')! });
 
-    changeCards(response.products);
+    updateCards(data?.products || []);
     setLoaded(true);
-    setTotalItemsCount(response.total);
+    setTotalItemsCount(data?.total || 0);
   }
 
   return (

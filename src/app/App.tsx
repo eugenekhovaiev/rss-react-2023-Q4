@@ -1,7 +1,7 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Main from '../pages/main/Main';
 import DetailsSection from '../widgets/detailsSection/DetailsSection';
-import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
+// import loadCardDetails from '../widgets/detailsSection/loadCardDetails';
 import Page404 from '../pages/page404/Page404';
 
 const router = createBrowserRouter(
@@ -15,7 +15,8 @@ const router = createBrowserRouter(
         </div>
       }
     >
-      <Route path="product/:id" element={<DetailsSection />} loader={loadCardDetails} />
+      {/* <Route path="product/:id" element={<DetailsSection />} loader={loadCardDetails} /> */}
+      <Route path="product/:id" element={<DetailsSection />} />
       <Route path="*" element={<Page404 />} />,
     </Route>,
   ),

@@ -52,9 +52,16 @@ export interface CardsAmountSelectProps {
   onCardsAmountChange: (newCardsAmount: number) => void;
 }
 
-export interface AppContextType {
-  searchTerm: string;
-  setSearchTerm: (newSearchTerm: string) => void;
-  cards: Product[] | [];
-  setCards: (newProductsArray: Product[] | []) => void;
+export interface CardsQueryOptions {
+  baseUrl?: string;
+  path?: string;
+  searchTerm?: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface CardQueryOptions {
+  baseUrl?: string;
+  path?: string;
+  id: number;
 }
