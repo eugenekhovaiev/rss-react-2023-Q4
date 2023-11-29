@@ -23,13 +23,17 @@ export interface Response {
   products: Product[];
 }
 
+export interface MainProps {
+  detailsResponse?: Product;
+  cardsResponse: Response;
+}
+
 export interface SearchProps {
   onSearchRequest: (searchTerm: string) => void;
 }
 
 export interface ResultsProps {
   cards: Product[] | [];
-  loaded: boolean;
   totalItemsCount: number;
   onPageChange: (newPageNumber: string) => void;
   onCardsAmountChange: (newCardsAmount: string) => void;

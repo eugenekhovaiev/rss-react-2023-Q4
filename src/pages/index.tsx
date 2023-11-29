@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Product, Response } from '@/shared/types';
+import { MainProps } from '@/shared/types';
 
 import SearchSection from '@/widgets/searchSection/SearchSection';
 import ResultsSection from '@/widgets/resultsSection/ResultsSection';
@@ -12,11 +12,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import getProductResp from '@/shared/api/getProductApi';
 import DetailsSection from '@/widgets/detailsSection/DetailsSection';
-
-interface MainProps {
-  detailsResponse?: Product;
-  cardsResponse: Response;
-}
 
 export const getServerSideProps = (async (context): Promise<{ props: MainProps }> => {
   const limitQuery = (context.query.limit as string) || INITIAL_CARDS_PER_PAGE;
@@ -82,7 +77,6 @@ function Main(props: MainProps): JSX.Element {
       <div className="main__outlet">
         <ResultsSection
           cards={cards}
-          loaded={true}
           totalItemsCount={totalItemsCount}
           onPageChange={handlePageChange}
           onCardsAmountChange={handleCardsAmountChange}
