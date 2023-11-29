@@ -9,8 +9,8 @@ import { useRouter } from 'next/router';
 
 function Pagination(props: PaginationProps): JSX.Element {
   const { query } = useRouter();
-  const pageQuery = query.page as string;
-  const limitQuery = query.limit as string;
+  const pageQuery = (query.page as string) || '1';
+  const limitQuery = (query.limit as string) || '6';
 
   const currPage = parseInt(pageQuery);
   const cardsPerPage = parseInt(limitQuery);

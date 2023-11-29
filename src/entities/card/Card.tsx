@@ -1,16 +1,15 @@
-// import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { CardProps } from '../../shared/types';
 
 function Card(props: CardProps): JSX.Element {
-  // const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
+  const router = useRouter();
 
-  // function handleClick(): void {
-  //   navigate(`/product/${props.card.id}/?${searchParams.toString()}`);
-  // }
+  function handleClick(): void {
+    router.push({ pathname: router.pathname, query: { ...router.query, details: props.card.id } });
+  }
 
   return (
-    <div className="card" data-testid="card" /* onClick={handleClick} */>
+    <div className="card" data-testid="card" onClick={handleClick}>
       <div className="card__info">
         <div className="card__line">
           <span className="card__line-title">Title:</span> {props.card.title}
