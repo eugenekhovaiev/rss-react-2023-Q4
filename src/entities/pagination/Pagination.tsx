@@ -1,46 +1,55 @@
-import arrowRight from '../../shared/assets/arrow-right.svg';
-import arrowLeft from '../../shared/assets/arrow-left.svg';
+import arrowRight from '@/shared/assets/arrow-right.svg';
+import arrowLeft from '@/shared/assets/arrow-left.svg';
+import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
 
 import { PaginationProps } from '../../shared/types';
+import { useRouter } from 'next/router';
 
 function Pagination(props: PaginationProps): JSX.Element {
+  const { query } = useRouter();
+  const pageQuery = query.page as string;
+  const limitQuery = query.limit as string;
+
+  const currPage = parseInt(pageQuery);
+  const cardsPerPage = parseInt(limitQuery);
+
   const [isFirstPage, setIsFirstPage] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
-    if (props.currPage >= props.totalItemsCount / props.cardsPerPage) {
+    if (currPage >= props.totalItemsCount / cardsPerPage) {
       setIsLastPage(true);
     } else {
       setIsLastPage(false);
     }
-    if (props.currPage === 1) {
+    if (currPage === 1) {
       setIsFirstPage(true);
     } else {
       setIsFirstPage(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.currPage, props.totalItemsCount]);
+  }, [currPage, cardsPerPage]);
 
   function handleNextClick(): void {
-    const newPageNumber = props.currPage + 1;
-    props.onPageChange(newPageNumber);
+    const newPageNumber = currPage + 1;
+    props.onPageChange(newPageNumber.toString());
   }
 
   function handlePrevClick(): void {
-    const newPageNumber = props.currPage - 1;
-    props.onPageChange(newPageNumber);
+    const newPageNumber = currPage - 1;
+    props.onPageChange(newPageNumber.toString());
   }
 
   return (
     <div className="pagination">
       <button disabled={isFirstPage} className="button pagination__button" onClick={handlePrevClick}>
-        <img src={arrowLeft} alt="previous-page" />
+        <Image src={arrowLeft} alt="previous-page" />
       </button>
-      <div className="pagination__number">{props.currPage}</div>
+      <div className="pagination__number">{currPage}</div>
       <button disabled={isLastPage} className="button pagination__button" onClick={handleNextClick}>
-        <img src={arrowRight} alt="next-page" />
+        <Image src={arrowRight} alt="next-page" />
       </button>
     </div>
   );

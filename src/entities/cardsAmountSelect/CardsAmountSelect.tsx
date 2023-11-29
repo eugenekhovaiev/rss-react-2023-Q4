@@ -1,12 +1,16 @@
 import { ChangeEvent, useState } from 'react';
 import { CardsAmountSelectProps } from '../../shared/types';
+import { useRouter } from 'next/router';
+import INITIAL_CARDS_PER_PAGE from '@/shared/consts/INITIAL_CARDS_ON_PAGE_COUNT';
 
 function CardsAmountSelect(props: CardsAmountSelectProps): JSX.Element {
-  const [value, setValue] = useState(props.cardsPerPage);
+  const { query } = useRouter();
+  const limitQuery = query.limit as string;
+  const [value, setValue] = useState(limitQuery || INITIAL_CARDS_PER_PAGE);
 
   function handleSelectChange(event: ChangeEvent<HTMLSelectElement>): void {
-    setValue(+event.target.value);
-    props.onCardsAmountChange(+event.target.value);
+    setValue(event.target.value);
+    props.onCardsAmountChange(event.target.value);
   }
 
   return (

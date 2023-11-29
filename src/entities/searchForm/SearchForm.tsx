@@ -1,25 +1,22 @@
 import { ChangeEvent, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { SearchProps } from '../../shared/types';
-import { setSearchTerm } from '../../shared/lib/store/slices/searchSlice';
-import { RootState } from '../../shared/lib/store/store';
+import { useRouter } from 'next/router';
 
 function SearchForm(props: SearchProps): JSX.Element {
-  const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
+  const { query } = useRouter();
+  const searchQuery = query.search as string;
 
-  const dispatch = useDispatch();
-  const updateSearchTerm = (searchTerm: string): void => {
-    dispatch(setSearchTerm({ searchTerm }));
-  };
+  const [value, setValue] = useState(searchQuery || '');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
-    updateSearchTerm(event.target.value);
+    setValue(event.target.value);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    props.onSearchRequest(searchTerm);
+    props.onSearchRequest(value);
   }
 
   return (
@@ -28,7 +25,7 @@ function SearchForm(props: SearchProps): JSX.Element {
         type="text"
         className="search-form__input"
         onChange={handleInputChange}
-        value={searchTerm}
+        value={value}
         placeholder="What product are you looking for?"
       />
       <button type="submit" className="button search-form__submit">

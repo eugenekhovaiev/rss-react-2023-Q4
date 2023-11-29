@@ -28,12 +28,11 @@ export interface SearchProps {
 }
 
 export interface ResultsProps {
+  cards: Product[] | [];
   loaded: boolean;
-  currPage: number;
-  cardsPerPage: number;
   totalItemsCount: number;
-  onPageChange: (newPageNumber: number) => void;
-  onCardsAmountChange: (newCardsAmount: number) => void;
+  onPageChange: (newPageNumber: string) => void;
+  onCardsAmountChange: (newCardsAmount: string) => void;
 }
 
 export interface CardProps {
@@ -41,15 +40,12 @@ export interface CardProps {
 }
 
 export interface PaginationProps {
-  currPage: number;
-  cardsPerPage: number;
   totalItemsCount: number;
-  onPageChange: (newPageNumber: number) => void;
+  onPageChange: (newPageNumber: string) => void;
 }
 
 export interface CardsAmountSelectProps {
-  cardsPerPage: number;
-  onCardsAmountChange: (newCardsAmount: number) => void;
+  onCardsAmountChange: (newCardsAmount: string) => void;
 }
 
 export interface CardsQueryOptions {

@@ -1,26 +1,26 @@
 import { Product, ResultsProps } from '../../shared/types';
 
-import { MouseEvent } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { MouseEvent } from 'react';
+// import { useNavigate, useSearchParams } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 
 import Card from '../../entities/card/Card';
 import Pagination from '../../entities/pagination/Pagination';
 import CardsAmountSelect from '../../entities/cardsAmountSelect/CardsAmountSelect';
 import Loader from '../../shared/UI/Loader';
-import { RootState } from '../../shared/lib/store/store';
+// import { RootState } from '../../shared/lib/store/store';
 
 function ResultsSection(props: ResultsProps): JSX.Element {
-  const cards = useSelector((state: RootState) => state.cards.cards);
+  const cards = props.cards;
 
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  // const navigate = useNavigate();
+  // const [searchParams] = useSearchParams();
 
-  function handleCloseClick(event: MouseEvent): void {
-    if (event.target === event.currentTarget) {
-      navigate(`/?${searchParams.toString()}`);
-    }
-  }
+  // function handleCloseClick(event: MouseEvent): void {
+  //   if (event.target === event.currentTarget) {
+  //     navigate(`/?${searchParams.toString()}`);
+  //   }
+  // }
 
   return (
     <section className="results">
@@ -28,17 +28,12 @@ function ResultsSection(props: ResultsProps): JSX.Element {
         {props.loaded ? (
           cards.length ? (
             <div className="results__wrapper">
-              <div className="results__cards" onClick={handleCloseClick}>
+              <div className="results__cards" /* onClick={handleCloseClick} */>
                 {cards && cards.map((card: Product) => <Card key={card.id} card={card} />)}
               </div>
               <div className="results__pagination">
-                <Pagination
-                  currPage={props.currPage}
-                  cardsPerPage={props.cardsPerPage}
-                  totalItemsCount={props.totalItemsCount}
-                  onPageChange={props.onPageChange}
-                />
-                <CardsAmountSelect cardsPerPage={props.cardsPerPage} onCardsAmountChange={props.onCardsAmountChange} />
+                <Pagination totalItemsCount={props.totalItemsCount} onPageChange={props.onPageChange} />
+                <CardsAmountSelect onCardsAmountChange={props.onCardsAmountChange} />
               </div>
             </div>
           ) : (
